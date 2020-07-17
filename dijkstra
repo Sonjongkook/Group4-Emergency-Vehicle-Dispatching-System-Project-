@@ -4,12 +4,16 @@ def dijkstra(graph, start, end):
 	#initialize distances for all of the nodes in the graph
 	#starting node should be 0, all other nodes start at infinity
 	shortest_distance = {}
-	infinity = 999999
+	infinity = float('inf') // 
+	
+	#create a list that consists of pairs for all of the nodes and their distances
+	available_nodes = [(shortest_distance[node], node) for node in graph] // may be we declare a list first then iterate?
+
 	for node in available_nodes:
 		shortest_distance[node] = infinity
 	shortest_distance[start] = 0
-	#create a list that consists of pairs for all of the nodes and their distances
-	available_nodes = [(shortest_distance[node], node) for node in graph]
+	
+	
 	#use a priority queue to sort the available_nodes by their distance
 	heapq.heapify(available_nodes)
 	while available_nodes:
@@ -29,6 +33,6 @@ def dijkstra(graph, start, end):
 		available_nodes = [(shortest_distance[node], node) for node in graph if not node.visited]
 		"""Once all of the nodes have been visited and their shortest distances calculated,
 		return the value of the shortest distance from the start node to the goal node"""
-	return shortest_distance[goal]
+	return shortest_distance[end] // we input parameter as named "end"
 
 
