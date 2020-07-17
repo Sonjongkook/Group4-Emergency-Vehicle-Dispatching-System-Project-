@@ -1,0 +1,34 @@
+import heapq
+import math
+def dijkstra(graph, start, end):
+	#initialize distances for all of the nodes in the graph
+	#starting node should be 0, all other nodes start at infinity
+	shortest_distance = {}
+	infinity = 999999
+	for node in available_nodes:
+		shortest_distance[node] = infinity
+	shortest_distance[start] = 0
+	#create a list that consists of pairs for all of the nodes and their distances
+	available_nodes = [(shortest_distance[node], node) for node in graph]
+	#use a priority queue to sort the available_nodes by their distance
+	heapq.heapify(available_nodes)
+	while available_nodes:
+		#set the node with the least distance to current and mark it as visited
+		current = heapq.heappop(available_nodes)
+		current.set_visited()
+		#check all of the current node's neighbors and update their distances
+		for next in current.neighbor:
+			if next.visited:
+				continue
+			temp_distance = shortest_distance[current] + current.get_weight(next)
+			if temp_distance < shortest_distance[next]:
+				shortest_distance[next] = temp_distance
+		#rebuild priority queue with new distances assigned to unvisited nodes
+		while available_nodes:
+			heapq.heappop(available_nodes)
+		available_nodes = [(shortest_distance[node], node) for node in graph if not node.visited]
+		"""Once all of the nodes have been visited and their shortest distances calculated,
+		return the value of the shortest distance from the start node to the goal node"""
+	return shortest_distance[goal]
+
+
