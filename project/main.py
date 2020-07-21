@@ -6,13 +6,13 @@ from dijkstra import dijkstra
 if __name__ == '__main__':
     parsed_data = json.load(open('data.json', 'r'))
     vehicles = parsed_data['vehicles']  # getting vehicle
-    requsets = parsed_data['requests']
+    requsets = parsed_data['requests'] 
     distances = parsed_data['distances']
 
     for vehicle in vehicles:
         vehicle['avaliable'] = True  # add a boolean variable to vehicle
 
-    graph = Graph()
+    graph = Graph() # make an graph object
 
     for distance in distances:
         if distance['zipcode1'] not in graph.vert_dict.keys():
@@ -26,6 +26,7 @@ if __name__ == '__main__':
     for requset in requsets:
         avaliable_vehicles = []
         for vehicle in vehicles:
+            # we need to initialize the status to implement dijkstra
             if vehicle['type'] == requset['vehicle_type'] and vehicle['avaliable']:
                 avaliable_vehicles.append(vehicle)
 
@@ -43,6 +44,11 @@ if __name__ == '__main__':
 
         if avaliable_vehicles:
             vehicles[vehicles.index(avaliable_vehicles[0])
-                     ]['avaliable'] = False
-            print("the best solution for request id:{} zipcode:{} is id:{} zipcode:{} distance with {} ".format(
+                     ]['avaliable'] = False  # since avaliable vehicle is sorted based on distance 0 index element is most closest one.
+            # and make this vehicle unavaliable
+            print("the best solution for id:{} request  zipcode:{} is id:{} zipcode:{} distance with {} ".format(
                 requset["id"], requset["zipcode"], avaliable_vehicles[0]['id'], avaliable_vehicles[0]['zipcode'], avaliable_vehicles[0]['distance']))
+
+
+
+        
