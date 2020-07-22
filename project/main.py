@@ -4,8 +4,8 @@ from vertex import Vertex
 from dijkstra import dijkstra
 
 if __name__ == '__main__':
-    #parsed_data = json.load(open('data.json', 'r'))
-    opened_data = json.load(open('data2.json', 'r'))
+    opened_data = json.load(open('data.json', 'r'))
+    #opened_data = json.load(open('data2.json', 'r'))
     vehicles = opened_data['vehicles']  # getting vehicle
     requsets = opened_data['requests']
     distances = opened_data['distances']
@@ -44,8 +44,19 @@ if __name__ == '__main__':
             avaliable_vehicles, key=lambda x: x['distance'])
 
         if avaliable_vehicles:
+            for aval in avaliable_vehicles:
+                print("id {} vehicle is ready at zipcode {} and distance is {}".format(aval['id'],
+                                                                                       aval['zipcode'], aval['distance']))
             vehicles[vehicles.index(avaliable_vehicles[0])
                      ]['avaliable'] = False  # since avaliable vehicle is sorted based on distance 0 index element is most closest one.
             # and make this vehicle unavaliable
-            print("the best solution for id:{} request  zipcode:{} is id:{} zipcode:{} distance with {} ".format(
+            print("the best solution for request id:{} zipcode:{} is id:{} zipcode:{} distance with {} ".format(
                 requset["id"], requset["zipcode"], avaliable_vehicles[0]['id'], avaliable_vehicles[0]['zipcode'], avaliable_vehicles[0]['distance']))
+            print("requset id {} is processed".format(requset["id"]))
+            print('-----------')
+
+        else:
+            print("There is no way to dispatch your request")
+
+    print('-----------')
+    print("all request has been processed")

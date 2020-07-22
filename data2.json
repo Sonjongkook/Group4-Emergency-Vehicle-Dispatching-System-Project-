@@ -299,6 +299,13 @@
       "distance": 0
     },
     {
+      "id": 10,
+      "vehicle_type": 3,
+      "zipcode": 64165,
+      "vehicle_id": null,
+      "distance": 0
+    },
+    {
       "id": 11,
       "vehicle_type": 1,
       "zipcode": 64166,
