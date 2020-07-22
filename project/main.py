@@ -4,15 +4,16 @@ from vertex import Vertex
 from dijkstra import dijkstra
 
 if __name__ == '__main__':
-    parsed_data = json.load(open('data.json', 'r'))
+    #parsed_data = json.load(open('data.json', 'r'))
+    parsed_data = json.load(open('data2.json', 'r'))
     vehicles = parsed_data['vehicles']  # getting vehicle
-    requsets = parsed_data['requests'] 
+    requsets = parsed_data['requests']
     distances = parsed_data['distances']
 
     for vehicle in vehicles:
         vehicle['avaliable'] = True  # add a boolean variable to vehicle
 
-    graph = Graph() # make an graph object
+    graph = Graph()  # make an graph object
 
     for distance in distances:
         if distance['zipcode1'] not in graph.vert_dict.keys():
@@ -48,7 +49,3 @@ if __name__ == '__main__':
             # and make this vehicle unavaliable
             print("the best solution for id:{} request  zipcode:{} is id:{} zipcode:{} distance with {} ".format(
                 requset["id"], requset["zipcode"], avaliable_vehicles[0]['id'], avaliable_vehicles[0]['zipcode'], avaliable_vehicles[0]['distance']))
-
-
-
-        
