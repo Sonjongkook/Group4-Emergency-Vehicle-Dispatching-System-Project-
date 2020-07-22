@@ -5,10 +5,10 @@ from dijkstra import dijkstra
 
 if __name__ == '__main__':
     #parsed_data = json.load(open('data.json', 'r'))
-    parsed_data = json.load(open('data2.json', 'r'))
-    vehicles = parsed_data['vehicles']  # getting vehicle
-    requsets = parsed_data['requests']
-    distances = parsed_data['distances']
+    opened_data = json.load(open('data2.json', 'r'))
+    vehicles = opened_data['vehicles']  # getting vehicle
+    requsets = opened_data['requests']
+    distances = opened_data['distances']
 
     for vehicle in vehicles:
         vehicle['avaliable'] = True  # add a boolean variable to vehicle
@@ -24,7 +24,7 @@ if __name__ == '__main__':
         graph.add_edge(distance['zipcode1'],
                        distance['zipcode2'], distance['distance'])
 
-    for requset in requsets:
+    for requset in requsets:  # Implement an algorithm that processes requests one by one
         avaliable_vehicles = []
         for vehicle in vehicles:
             # we need to initialize the status to implement dijkstra
