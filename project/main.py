@@ -1,14 +1,11 @@
 import json
-#from json2html import *
-#import sys
 from graph import Graph
 from vertex import Vertex
 from dijkstra import dijkstra
 
 if __name__ == '__main__':
     opened_data = json.load(open('data.json', 'r'))
-    #opened_data = json.load(open('data2.json', 'r')) (another json data)
-    files = json2html.convert(json = opened_data)
+    # opened_data = json.load(open('data2.json', 'r')) (another json data)
     vehicles = opened_data['vehicles']  # getting vehicle
     requsets = opened_data['requests']
     distances = opened_data['distances']
@@ -43,7 +40,7 @@ if __name__ == '__main__':
         for aval in avaliable_vehicles:
             aval['distance'] = graph.get_vertax(
                 aval['zipcode']).get_distance()  # get a distance from a dijkstra
-                
+
         # sort based on distance so we can find minimum one as an best one
         avaliable_vehicles = sorted(
             avaliable_vehicles, key=lambda x: x['distance'])
